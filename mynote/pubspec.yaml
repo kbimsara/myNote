@@ -16,8 +16,10 @@ dependencies:
   path: ^1.8.3
 
   cupertino_icons: ^1.0.8
-  flutter_quill: ^9.0.0   # or latest
+  flutter_quill: ^11.4.1
   flutter_svg:  any       # Quill’s icons use SVG
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
