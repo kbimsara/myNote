@@ -20,6 +20,7 @@ dependencies:
   flutter_svg:  any       # Quill’s icons use SVG
   flutter_localizations:
     sdk: flutter
+  quill_delta: ^3.0.0-nullsafety.2
 
 dev_dependencies:
   flutter_test:
