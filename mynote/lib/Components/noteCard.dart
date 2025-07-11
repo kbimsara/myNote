@@ -41,7 +41,7 @@ class NoteCard extends StatelessWidget {
                       );
                     }
                     // Navigate to the MainApp page
-                    if (pg == "Home") {
+                    if (pg != "Home") {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => HomePage()),

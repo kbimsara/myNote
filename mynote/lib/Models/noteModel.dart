@@ -21,7 +21,7 @@ class Note {
     return Note(
       noteId: map['noteId'],
       noteDt: map['noteDt'],
-      stat: (map['stat'] as int) == 0,
+      stat: (map['stat'] as int) == 1,
     );
   }
 }

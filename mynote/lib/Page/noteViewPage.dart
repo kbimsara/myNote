@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:mynote/Models/dbHelper.dart';
+import 'package:mynote/Page/homePage.dart';
 import '../Models/noteModel.dart'; // adjust if your path differs
 
 class NoteViewPage extends StatefulWidget {
@@ -44,7 +45,7 @@ class _NoteViewPageState extends State<NoteViewPage> {
     _controller = quill.QuillController(
       document: document,
       selection: const TextSelection.collapsed(offset: 0),
-      readOnly: _isLocked,
+      // readOnly: _isLocked,
     );
 
     if (mounted) {
@@ -58,33 +59,47 @@ class _NoteViewPageState extends State<NoteViewPage> {
     await db.updateNoteContent(widget.noteId, deltaJson);
 
     if (!mounted) return;
-    ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('Note updated')));
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Note updated')));
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const HomePage()),
+    );
   }
 
   /// Toggle lock/unlock
   Future<void> _toggleLock() async {
-    _isLocked = !_isLocked;
-    await db.updateNoteStatus(widget.noteId, _isLocked);
+    // bool status = false;
+    final note2 = await db.getNoteById(widget.noteId);
 
-    // when locking, set editor to read‑only; when unlocking, make editable
-    _controller = quill.QuillController(
-      document: _controller.document,
-      selection: _controller.selection,
-      readOnly: _isLocked,
-    );
+    if (note2 == null) {
+      if (mounted) Navigator.pop(context); // note not found
+      return;
+    } else {
+      bool status = note2.stat;
+      status = !status;
+      await db.updateNoteStatus(widget.noteId, status);
+    }
+
+    // print('local-${status} : desc ${note.noteDt}: status- ${note.stat}');
+
     setState(() {});
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(_isLocked ? 'Locked' : 'Unlocked')),
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(_isLocked ? 'Locked' : 'Unlocked')));
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const HomePage()),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(
@@ -106,7 +121,6 @@ class _NoteViewPageState extends State<NoteViewPage> {
               focusNode: _focusNode,
               scrollController: _scrollController,
               config: quill.QuillEditorConfig(
-                // readOnly: _isLocked,
                 scrollable: true,
                 autoFocus: true,
                 expands: true,

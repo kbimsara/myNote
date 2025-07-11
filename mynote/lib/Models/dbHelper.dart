@@ -72,9 +72,10 @@ class DatabaseHelper {
   /// set the `stat` field (true = 1, false = 0).
   Future<int> updateNoteStatus(int noteId, bool stat) async {
     final db = await database;
+    print('dRT-${stat}- ${noteId}');
     return await db.update(
       'notes',
-      {'stat': stat ? 1 : 0},
+      {'stat': stat ? true : false},
       where: 'noteId = ?',
       whereArgs: [noteId],
     );
