@@ -88,4 +88,4 @@ lib/
 
 ## 🙌 Credits
 
-Developed with ❤️ by [Kavindu Bimsara](https://github.com/kbimsara)
+Developed by [Kavindu Bimsara](https://github.com/kbimsara)
