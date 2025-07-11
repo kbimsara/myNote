@@ -35,8 +35,9 @@ A beautifully designed, secure, and simple **note-taking app** built with **Flut
 
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/yourusername/flutter-note-app.git
-   cd flutter-note-app
+   git clone https://github.com/kbimsara/myNote.git
+   cd myNote
+   cd myNote
    ```
 
 2. **Install packages**
@@ -85,12 +86,6 @@ lib/
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
 ## 🙌 Credits
 
-Developed with ❤️ by [Your Name](https://github.com/yourusername)
+Developed with ❤️ by [Your Name](https://github.com/kbimsara)
